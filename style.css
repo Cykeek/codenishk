@@ -1,0 +1,212 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    letter-spacing: 1px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+:root {
+    --ff: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    --fs: 1rem;
+    --gap: 5px;
+
+    --bgclr:#151515;
+    --bglight: #232323;
+    --bigrad: 22px;
+    --smallrad: 12px;
+    --definlinepad: 22px;
+    --defpad: 22px var(--definlinepad);
+    --deffontclr: #fff;
+
+    --bodypad: 20px 50px;
+
+    --btnbg:#2D3642;
+    --btnclr: #fff;
+    --btnpad: var(--defpad);
+    --btntxt: bold;
+    --btntxtsize: 15px;
+
+    --headpad: 10px 10px;
+
+    --searchpad: var(--defpad);
+    --searchbg: #1E1E1E;
+    --searchtxt: #5A5A5A;
+    --searchiconpad: 22px;
+    
+    --progressbarbg: #ffff;
+}
+
+@media (min-width:1919px) {
+    :root {
+        --maxgap: 10px;
+    }
+    
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    max-height: 100svh;
+    font-family: var(--ff);
+    font-size: var(--fs);
+    background: var(--bgclr);
+    padding: var(--bodypad);
+    color: var(--deffontclr);
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--gap) * 2);
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+a{
+    color: var(--searchtxt);
+    text-decoration: none;
+}
+
+button {
+    padding: var(--btnpad);
+    display: flex;
+    gap: var(--gap);
+    background-color: var(--btnbg);
+    color: var(--btnclr);
+    border: 0px;
+    border-radius: var(--smallrad);
+    font-weight: var(--btntxt);
+    font-size: var(--btntxtsize);
+    text-transform: capitalize;
+    cursor: pointer;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--bglight);
+    padding: var(--headpad);
+    border-radius: var(--bigrad);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.searchbar {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    color: var(--searchtxt);
+    gap: var(--gap);
+}
+
+.searchbar > * {
+    grid-row: 1;
+}
+
+.searchbar i {
+    grid-column-start: 4;
+    justify-self: end;
+    align-self: center;
+    padding-inline: var(--searchiconpad);
+}
+
+.searchbar > input {
+    grid-column: 1/ span 4;
+    padding: var(--searchpad);
+    background-color: var(--searchbg);
+    border: 0;
+    border-radius: var(--smallrad);
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: calc(var(--gap) * 2);
+    min-height: 100% !important;
+    flex-grow: 1;
+}
+
+main > div {
+    grid-row: 1;
+    overflow-y: auto;
+}
+
+.infocontent {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-inline: 0;
+    background: transparent;
+}
+
+.content {
+    background-color: var(--bglight);
+    border-radius: var(--bigrad);
+    padding: var(--defpad);
+}
+
+.infocontent > div {
+    padding-inline: var(--definlinepad);
+}
+
+.directories{
+    margin-bottom: calc(var(--gap) * 5);
+    scrollbar-gutter: stable;
+    overflow-y: auto;
+}
+
+.directories::-webkit-scrollbar {
+    width: 8px;
+    background-color: transparent;
+    
+}
+
+.directories::-webkit-scrollbar-thumb {
+    background-color: var(--searchtxt);
+    border-radius: 12px;
+}
+
+.directories > ul {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--gap) * 2);
+}
+
+.directories a {
+    background-color: var(--bglight);
+    padding: var(--defpad);
+    display: flex;
+    border-radius: var(--smallrad);
+    transition: background-color 0.2s ease;
+}
+
+.directories a:hover {
+    background-color: #333;
+}
+
+.storage{
+    padding-top: calc(var(--gap) * 5 );
+    border-top: 1px solid var(--searchtxt);
+} 
+
+progress {
+    width: 100%;
+    block-size: 1.2rem;
+}
+
+.drives {
+    height: 100px;
+    width: 100%;
+    background-color: #fff;
+}
+.drivename {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
