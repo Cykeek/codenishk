@@ -31,6 +31,10 @@
                 $hiddenFolder = 'cloudnishk';
                 $files = scandir($directory);
                 $files = array_diff($files, array('.', '..', $hiddenFolder));
+                $files = array_filter($files, function ($file) {
+                    return $file[0] !== '.'; // Exclude files and folders that start with a dot
+                });
+
                 // Get total and free space
                 $totalSpace = disk_total_space($directory);
                 $freeSpace = disk_free_space($directory);
@@ -48,11 +52,11 @@
                 $regularFiles = [];
 
                 foreach ($files as $file) {
-                if (is_dir($directory . $file)) {
-                $folders[] = $file; // Add to folders array
-                } else {
-                $regularFiles[] = $file; // Add to files array
-                }
+                    if (is_dir($directory . $file)) {
+                        $folders[] = $file; // Add to folders array
+                    } else {
+                        $regularFiles[] = $file; // Add to files array
+                    }
                 }
 
                 // Sort folders and files
@@ -61,30 +65,29 @@
 
                 // Merge folders and files
                 $sortedFiles = array_merge($folders, $regularFiles);
-
                 foreach ($sortedFiles as $file) {
-                echo "<a href=''>".$file."</a>";
+                    echo "<a href=''>" . $file . "</a>";
                 }
                 ?>
             </div>
             <div class="storage">
-                <progress class="progressbar" value="<?= $usedSpace?>" max="<?= $totalSpace?>">
+                <progress class="progressbar" value="<?= $usedSpace ?>" max="<?= $totalSpace ?>">
                 </progress>
                 <div class="drivename">
                     <h2>
                         <i class="fa-solid fa-database"></i>&nbsp;
-                        C:&nbsp;
+                        /&nbsp;
                         <span>
                             <?php
 
-                            echo $usedSpaceGB." GB / ".$totalSpaceGB." GB ";
+                            echo $usedSpaceGB . " GB / " . $totalSpaceGB . " GB ";
                             ?>
                         </span>
                     </h2>
                     <p>
                         <?php
-                            $percent = round(($usedSpace / $totalSpace) * 100);
-                            echo $percent."%";
+                        $percent = round(($usedSpace / $totalSpace) * 100);
+                        echo $percent . "%";
                         ?>
                     </p>
                 </div>
