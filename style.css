@@ -145,7 +145,7 @@ main > div {
 }
 
 .infocontent > div {
-    padding-inline: var(--definlinepad);
+    padding-inline: 0 var(--definlinepad);
 }
 
 .directories{
