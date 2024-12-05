@@ -39,13 +39,6 @@
     --progressbarbg: #ffff;
 }
 
-@media (min-width:1919px) {
-    :root {
-        --maxgap: 10px;
-    }
-    
-}
-
 html {
     height: 100%;
 }
@@ -60,12 +53,6 @@ body {
     display: flex;
     flex-direction: column;
     gap: calc(var(--gap) * 2);
-}
-
-ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
 }
 
 a{
@@ -159,6 +146,9 @@ main > div {
     margin-bottom: calc(var(--gap) * 5);
     scrollbar-gutter: stable;
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--gap) * 2);
 }
 
 .directories::-webkit-scrollbar {
@@ -170,12 +160,7 @@ main > div {
 .directories::-webkit-scrollbar-thumb {
     background-color: var(--searchtxt);
     border-radius: 12px;
-}
 
-.directories > ul {
-    display: flex;
-    flex-direction: column;
-    gap: calc(var(--gap) * 2);
 }
 
 .directories a {

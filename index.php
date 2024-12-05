@@ -26,27 +26,35 @@
     <main>
         <div class="infocontent">
             <div class="directories">
-                <ul>
-                    <li><a href="">folders</a></li>
-                    <li><a href="">folders</a></li>
-                    <li><a href="">folders</a></li>
-                    <li><a href="">folders</a></li>
-                    <li><a href="">folders</a></li>
-                    <li><a href="">folders</a></li>
-                    <li><a href="">folders</a></li>
-                    <li><a href="">folders</a></li>
-                    <li><a href="">folders</a></li>
-                    <li><a href="">folders</a></li>
-                    <li><a href="">folders</a></li>
-                    <li><a href="">folders</a></li>
-                    <li><a href="">folders</a></li>
-                    <li><a href="">folders</a></li>
-                    <li><a href="">folders</a></li>
-                    <li><a href="">folders</a></li>
-                    <li><a href="">folders</a></li>
-                    <li><a href="">folders</a></li>
-                    <li><a href="">folders</a></li>
-                </ul>
+                <?php
+                    $directory = '../';
+                    $hiddenFolder = 'cloudnishk';
+                    $files = scandir($directory);
+                    $files = array_diff($files, array('.', '..', $hiddenFolder));
+                    
+                    // Separate folders and files
+                    $folders = [];
+                    $regularFiles = [];
+
+                    foreach ($files as $file) {
+                        if (is_dir($directory . $file)) {
+                            $folders[] = $file; // Add to folders array
+                        } else {
+                            $regularFiles[] = $file; // Add to files array
+                        }
+                    }
+
+                    // Sort folders and files
+                    sort($folders);
+                    sort($regularFiles);
+
+                    // Merge folders and files
+                    $sortedFiles = array_merge($folders, $regularFiles);
+
+                    foreach ($sortedFiles as $file) {
+                        echo "<a href=''>".$file."</a>";
+                    }
+                ?>
             </div>
             <div class="storage">
                 <progress class="progressbar" value="80" max="100">
