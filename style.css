@@ -175,6 +175,14 @@ main > div {
     display: flex;
     border-radius: var(--smallrad);
     transition: background-color 0.2s ease;
+    font-weight: 500;
+    color: var(--deffontclr);
+    align-items: center;
+    gap: calc(var(--gap) * 5);
+}
+
+.directories a i {
+    font-size: x-large;
 }
 
 .directories a:hover {

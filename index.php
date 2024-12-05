@@ -66,7 +66,9 @@
                 // Merge folders and files
                 $sortedFiles = array_merge($folders, $regularFiles);
                 foreach ($sortedFiles as $file) {
-                    echo "<a href=''>" . $file . "</a>";
+                    $icon = is_dir($directory. $file) ? '<i class="fa-solid fa-folder"></i>' : '<i class="fa-solid fa-file"></i>' ;
+                    // print_r(is_dir($directory. $file));
+                    echo "<a href=''>". $icon . $file . "</a>";
                 }
                 ?>
             </div>
