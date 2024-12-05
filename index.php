@@ -27,48 +27,65 @@
         <div class="infocontent">
             <div class="directories">
                 <?php
-                    $directory = '../';
-                    $hiddenFolder = 'cloudnishk';
-                    $files = scandir($directory);
-                    $files = array_diff($files, array('.', '..', $hiddenFolder));
-                    
-                    // Separate folders and files
-                    $folders = [];
-                    $regularFiles = [];
+                $directory = '../';
+                $hiddenFolder = 'cloudnishk';
+                $files = scandir($directory);
+                $files = array_diff($files, array('.', '..', $hiddenFolder));
+                // Get total and free space
+                $totalSpace = disk_total_space($directory);
+                $freeSpace = disk_free_space($directory);
 
-                    foreach ($files as $file) {
-                        if (is_dir($directory . $file)) {
-                            $folders[] = $file; // Add to folders array
-                        } else {
-                            $regularFiles[] = $file; // Add to files array
-                        }
-                    }
+                // Calculate used space
+                $usedSpace = $totalSpace - $freeSpace;
 
-                    // Sort folders and files
-                    sort($folders);
-                    sort($regularFiles);
+                // Convert bytes to gigabytes for easier readability
+                $totalSpaceGB = round($totalSpace / (1024 * 1024 * 1024), 2); // Total space in GB
+                $freeSpaceGB = round($freeSpace / (1024 * 1024 * 1024), 2); // Free space in GB
+                $usedSpaceGB = round($usedSpace / (1024 * 1024 * 1024), 2); // Used space in GB
+                
+                // Separate folders and files
+                $folders = [];
+                $regularFiles = [];
 
-                    // Merge folders and files
-                    $sortedFiles = array_merge($folders, $regularFiles);
+                foreach ($files as $file) {
+                if (is_dir($directory . $file)) {
+                $folders[] = $file; // Add to folders array
+                } else {
+                $regularFiles[] = $file; // Add to files array
+                }
+                }
 
-                    foreach ($sortedFiles as $file) {
-                        echo "<a href=''>".$file."</a>";
-                    }
+                // Sort folders and files
+                sort($folders);
+                sort($regularFiles);
+
+                // Merge folders and files
+                $sortedFiles = array_merge($folders, $regularFiles);
+
+                foreach ($sortedFiles as $file) {
+                echo "<a href=''>".$file."</a>";
+                }
                 ?>
             </div>
             <div class="storage">
-                <progress class="progressbar" value="80" max="100">
+                <progress class="progressbar" value="<?= $usedSpace?>" max="<?= $totalSpace?>">
                 </progress>
                 <div class="drivename">
                     <h2>
                         <i class="fa-solid fa-database"></i>&nbsp;
                         C:&nbsp;
                         <span>
-                            982 GB / 5 TB
+                            <?php
+
+                            echo $usedSpaceGB." GB / ".$totalSpaceGB." GB ";
+                            ?>
                         </span>
                     </h2>
                     <p>
-                        80%
+                        <?php
+                            $percent = round(($usedSpace / $totalSpace) * 100);
+                            echo $percent."%";
+                        ?>
                     </p>
                 </div>
             </div>
