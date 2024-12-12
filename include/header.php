@@ -1,3 +1,8 @@
+<?php
+include("utils/utils.php");
+$utils = new Utils();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,71 +31,23 @@
     <main>
         <div class="infocontent">
             <div class="directories">
-                <?php
-                $directory = '../';
-                $hiddenFolder = 'cloudnishk';
-                $files = scandir($directory);
-                $files = array_diff($files, array('.', '..', $hiddenFolder));
-                $files = array_filter($files, function ($file) {
-                    return $file[0] !== '.'; // Exclude files and folders that start with a dot
-                });
-
-                // Get total and free space
-                $totalSpace = disk_total_space($directory);
-                $freeSpace = disk_free_space($directory);
-
-                // Calculate used space
-                $usedSpace = $totalSpace - $freeSpace;
-
-                // Convert bytes to gigabytes for easier readability
-                $totalSpaceGB = round($totalSpace / (1024 * 1024 * 1024), 2); // Total space in GB
-                $freeSpaceGB = round($freeSpace / (1024 * 1024 * 1024), 2); // Free space in GB
-                $usedSpaceGB = round($usedSpace / (1024 * 1024 * 1024), 2); // Used space in GB
-                
-                // Separate folders and files
-                $folders = [];
-                $regularFiles = [];
-
-                foreach ($files as $file) {
-                    if (is_dir($directory . $file)) {
-                        $folders[] = $file; // Add to folders array
-                    } else {
-                        $regularFiles[] = $file; // Add to files array
-                    }
-                }
-
-                // Sort folders and files
-                sort($folders);
-                sort($regularFiles);
-
-                // Merge folders and files
-                $sortedFiles = array_merge($folders, $regularFiles);
-                foreach ($sortedFiles as $file) {
-                    $icon = is_dir($directory . $file) ? '<i class="fa-solid fa-folder"></i>' : '<i class="fa-solid fa-file"></i>';
-                    // print_r(is_dir($directory. $file));
-                    echo "<a href=''>" . $icon . $file . "</a>";
-                }
-                ?>
+                <?php foreach ($utils->sortedFiles as $file) { ?>
+                    <a href='<?= $utils->check($file); ?>'> <?= $utils->icon($file) . $file ?> </a>
+                <?php } ?>
             </div>
             <div class="storage">
-                <progress class="progressbar" value="<?= $usedSpace ?>" max="<?= $totalSpace ?>">
+                <progress class="progressbar" value="<?= $utils->usedSpace ?>" max="<?= $utils->totalSpace ?>">
                 </progress>
                 <div class="drivename">
                     <h2>
                         <i class="fa-solid fa-database"></i>&nbsp;
                         /&nbsp;
                         <span>
-                            <?php
-
-                            echo $usedSpaceGB . " GB / " . $totalSpaceGB . " GB ";
-                            ?>
+                            <?= $utils->usedSpaceGB . " GB / " . $utils->totalSpaceGB . " GB " ?>
                         </span>
                     </h2>
                     <p>
-                        <?php
-                        $percent = round(($usedSpace / $totalSpace) * 100);
-                        echo $percent . "%";
-                        ?>
+                        <?= $utils->percent . "%" ?>
                     </p>
                 </div>
             </div>
