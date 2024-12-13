@@ -19,10 +19,10 @@ $utils = new Utils();
 
 <body>
     <div class="container header">
-        <button>
+        <a href='/cloudnishk' class="homebtn">
             <i class="fa-solid fa-house"></i>
             home
-        </button>
+        </a>
         <div class="searchbar">
             <input type="text" id="search" placeholder="Search">
             <i class="fa-solid fa-magnifying-glass"></i>

@@ -66,7 +66,7 @@ a{
     text-decoration: none;
 }
 
-button {
+button, .homebtn {
     padding: var(--btnpad);
     display: flex;
     gap: var(--gap);
@@ -130,7 +130,7 @@ main > div {
     overflow-y: auto;
 }
 
-.infocontent {
+.infocontent, .content {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -138,17 +138,11 @@ main > div {
     background: transparent;
 }
 
-.content {
-    background-color: var(--bglight);
-    border-radius: var(--bigrad);
-    padding: var(--defpad);
-}
-
 .infocontent > div {
     padding-inline: 0 var(--definlinepad);
 }
 
-.directories{
+.directories, .readfiles{
     margin-bottom: calc(var(--gap) * 5);
     scrollbar-gutter: stable;
     overflow-y: auto;
@@ -157,13 +151,23 @@ main > div {
     gap: calc(var(--gap) * 2);
 }
 
-.directories::-webkit-scrollbar {
+.readfiles {
+    padding-right: 10px;
+}
+
+.content {
+    background-color: var(--bglight);
+    border-radius: var(--bigrad);
+    padding: var(--defpad);
+}
+
+.directories::-webkit-scrollbar, .readfiles::-webkit-scrollbar {
     width: 8px;
     background-color: transparent;
     
 }
 
-.directories::-webkit-scrollbar-thumb {
+.directories::-webkit-scrollbar-thumb, .readfiles::-webkit-scrollbar-thumb {
     background-color: var(--searchtxt);
     border-radius: 12px;
 
@@ -186,6 +190,23 @@ main > div {
 }
 
 .directories a:hover {
+    background-color: #333;
+}
+
+.readfiles a {
+    /* background-color: var(--bglight); */
+    border-bottom: 1px solid #fff;
+    padding: var(--defpad);
+    display: flex;
+    /* border-radius: var(--smallrad); */
+    transition: background-color 0.2s ease;
+    font-weight: 500;
+    color: var(--deffontclr);
+    align-items: center;
+    gap: calc(var(--gap) * 5);
+}
+
+.readfiles a:hover {
     background-color: #333;
 }
 
